@@ -4,7 +4,7 @@ from toolz import interpose, valmap, merge_with
 from multiprocessing import Pool
 from time import sleep, time
 from logging import warning
-from xinga_muito.settings import BOOTSTRAP_ID, URL_QUERY, HTTP_METHOD
+from xinga_muito.settings import BOOTSTRAP_ID, URL_QUERY, HTTP_METHOD, SLEEP_TIME_REQUESTS
 from xinga_muito.data import data_model
 from xinga_muito.data.io import request_twitter
 
@@ -31,7 +31,8 @@ def get_parse_save_tweets(db_conn, query, max_id_available_api):
     warning('Running: %s' % str(query['q']))
 
     while max_id_to_consume > max_id_stored:
-        sleep(20)
+        sleep(SLEEP_TIME_REQUESTS)
+        query['max_id'] = max_id_to_consume
         response = request_twitter(URL_QUERY, HTTP_METHOD, parameters=query)
 
         tweets = json.loads(response.read())['statuses']
@@ -39,7 +40,11 @@ def get_parse_save_tweets(db_conn, query, max_id_available_api):
 
         map(lambda t: db_conn.create_or_get(**t), tweets)
 
-        max_id_to_consume = min(map(lambda t: t['tweet_id'], tweets))
+        try:
+            max_id_to_consume = min(map(lambda t: t['tweet_id'], tweets))
+        except ValueError:
+            break # not more tweets to be consumed
+
 
 
 def from_twitter(key_words):
@@ -55,9 +60,9 @@ def from_twitter(key_words):
     # TODO: fix this mess and also in data_model (ta uma macarronada)
     # TODO: make it deal with fails, use future
     get_parse_save_tweets(data_model.NubankTweets(), **requests_param['nubank'])
-    # get_parse_save_tweets(model.ItauTweets(), **requests_param['itau'])
-    # get_parse_save_tweets(model.BradescoTweets(), **requests_param['bradesco'])
-    # get_parse_save_tweets(model.DigioTweets(), **requests_param['digio'])
-    # get_parse_save_tweets(model.OriginalTweets(), **requests_param['original'])
-    # get_parse_save_tweets(model.BrasilTweets(), **requests_param['brasil'])
-    # get_parse_save_tweets(model.CaixaTweets(), **requests_param['caixa'])
+    get_parse_save_tweets(data_model.ItauTweets(), **requests_param['itau'])
+    get_parse_save_tweets(data_model.BradescoTweets(), **requests_param['bradesco'])
+    get_parse_save_tweets(data_model.DigioTweets(), **requests_param['digio'])
+    get_parse_save_tweets(data_model.OriginalTweets(), **requests_param['original'])
+    get_parse_save_tweets(data_model.BrasilTweets(), **requests_param['brasil'])
+    get_parse_save_tweets(data_model.CaixaTweets(), **requests_param['caixa'])

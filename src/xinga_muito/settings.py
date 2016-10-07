@@ -18,6 +18,7 @@ HTTP_HANDLER = urllib.HTTPHandler(debuglevel=0)
 HTTPS_HANDLER = urllib.HTTPSHandler(debuglevel=0)
 
 URL_QUERY = "https://api.twitter.com/1.1/search/tweets.json"
+SLEEP_TIME_REQUESTS = 20
 
 BOOTSTRAP_ID = 721267742230323200
 SCHEMA_TWEETS = '(id INTEGER PRIMARY KEY, time DATETIME, user_id INT, account_since DATETIME, ' \
@@ -27,10 +28,10 @@ LIST_COLUMNS_TWEET = ['id', 'time', 'user_id', 'account_since', 'friends_count',
 STRING_COLUMNS_TWEET = '(' + ''.join(interpose(',', LIST_COLUMNS_TWEET)) + ')'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TEST_ENV = 'test'
-DATA_STORAGE_PATH = os.path.join((os.sep).join(BASE_DIR.split(os.sep)[0:-2]), 'data')
-DATA_STORAGE_DIR = os.path.join(DATA_STORAGE_PATH, 'storage/test/raw_tweets/') if TEST_ENV \
-                                else os.path.join(DATA_STORAGE_PATH, 'storage/prod/raw_tweets/')
+ENV = 'test'
+DATA_STORAGE_PATH = os.path.join((os.sep).join(BASE_DIR.split(os.sep)[0:-2]), 'data/storage/')
+DATA_STORAGE_DIR = os.path.join(DATA_STORAGE_PATH, 'test/raw_tweets/') if ENV \
+                                else os.path.join(DATA_STORAGE_PATH, 'prod/raw_tweets/')
 
 
 KEY_WORDS = {'nubank': ['nubank', 'nubankbrasil', 'sounu', 'nulove'],
