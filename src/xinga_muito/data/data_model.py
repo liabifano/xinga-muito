@@ -193,6 +193,35 @@ class BrasilTweets(BrasilSqLite):
             return None
 
 
+class SantanderSqLite(pw.Model):
+    class Meta:
+        database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'santander.db')
+
+
+class SantanderTweets(SantanderSqLite):
+    tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
+    tweet_create_at = pw.DateTimeField(index=True)
+    user_id = pw.CharField()
+    user_since = pw.DateTimeField()
+    user_friends_count = pw.IntegerField()
+    user_followers_count = pw.IntegerField()
+    user_location = pw.CharField()
+    tweet_text = pw.TextField()
+    key_words = pw.TextField()
+    blob = pw.TextField()
+
+    def create_or_ignore_table(self):
+        if self.table_exists() == False:
+            self.create_table()
+
+    @classmethod
+    def get_max_tweet_id(cls):
+        if cls.table_exists() and cls.select().count() > 0:
+            return int(cls.select(pw.fn.Max(cls.tweet_id)).scalar())
+        else:
+            return None
+
+
 class CaixaSqLite(pw.Model):
     class Meta:
         database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'caixa.db')

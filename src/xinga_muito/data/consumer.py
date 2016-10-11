@@ -10,7 +10,10 @@ from xinga_muito.data.io import request_twitter
 
 
 def query_maker(key_words, count):
-    return {'q': ' '.join(interpose('OR', key_words)), 'since_at': 0, 'count': count}
+    return {'q': ' '.join(interpose('OR', key_words)),
+            'since_at': 0,
+            'count': count,
+            'lang': 'pt'}
 
 
 def get_max_id_in_api(query):
@@ -65,4 +68,5 @@ def from_twitter(key_words):
     get_parse_save_tweets(data_model.DigioTweets(), **requests_param['digio'])
     get_parse_save_tweets(data_model.OriginalTweets(), **requests_param['original'])
     get_parse_save_tweets(data_model.BrasilTweets(), **requests_param['brasil'])
+    get_parse_save_tweets(data_model.SantanderTweets(), **requests_param['santander'])
     get_parse_save_tweets(data_model.CaixaTweets(), **requests_param['caixa'])

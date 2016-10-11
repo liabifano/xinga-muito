@@ -35,10 +35,11 @@ DATA_STORAGE_DIR = os.path.join(DATA_STORAGE_PATH, 'test/raw_tweets/') if ENV \
 
 
 KEY_WORDS = {'nubank': ['nubank', 'nubankbrasil', 'sounu', 'nulove'],
-             'itau': ['itau', 'issomudaomundo'],
+             'itau': ['itau', 'issomudaomundo', 'digitau'],
              'bradesco': ['bradesco'],
+             'santander': ['santander_br'],
              'digio': ['meudigio'],
              'original': ['bancooriginal', 'souoriginal'],
              'brasil': ['bancodobrasil'],
-             'caixa': ['caixa']}
+             'caixa': ['@caixa']}
 
