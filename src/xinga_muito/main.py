@@ -1,4 +1,4 @@
-from xinga_muito.data import consumer
+from xinga_muito import consumer
 from xinga_muito.settings import KEY_WORDS
 
 

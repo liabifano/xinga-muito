@@ -13,6 +13,7 @@ setup(name='xinga-muito',
                         'boto==2.38.0',
                         'oauth2==1.9.0.post1',
                         'peewee==2.8.0',
+                        'pandas==0.22.0',
                         'toolz==0.8.0'],
       include_package_data=True,
       zip_safe=False)
