@@ -1,7 +1,7 @@
 import json
+
 import peewee as pw
 from dateutil import parser
-
 from xinga_muito.settings import DATA_STORAGE_DIR
 
 
@@ -228,6 +228,178 @@ class CaixaSqLite(pw.Model):
 
 
 class CaixaTweets(CaixaSqLite):
+    tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
+    tweet_create_at = pw.DateTimeField(index=True)
+    user_id = pw.CharField()
+    user_since = pw.DateTimeField()
+    user_friends_count = pw.IntegerField()
+    user_followers_count = pw.IntegerField()
+    user_location = pw.CharField()
+    tweet_text = pw.TextField()
+    key_words = pw.TextField()
+    blob = pw.TextField()
+
+    def create_or_ignore_table(self):
+        if self.table_exists() == False:
+            self.create_table()
+
+    @classmethod
+    def get_max_tweet_id(cls):
+        if cls.table_exists() and cls.select().count() > 0:
+            return int(cls.select(pw.fn.Max(cls.tweet_id)).scalar())
+        else:
+            return None
+
+
+class BndesSqLite(pw.Model):
+    class Meta:
+        database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'caixa.db')
+
+
+class BndesTweets(BndesSqLite):
+    tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
+    tweet_create_at = pw.DateTimeField(index=True)
+    user_id = pw.CharField()
+    user_since = pw.DateTimeField()
+    user_friends_count = pw.IntegerField()
+    user_followers_count = pw.IntegerField()
+    user_location = pw.CharField()
+    tweet_text = pw.TextField()
+    key_words = pw.TextField()
+    blob = pw.TextField()
+
+    def create_or_ignore_table(self):
+        if self.table_exists() == False:
+            self.create_table()
+
+    @classmethod
+    def get_max_tweet_id(cls):
+        if cls.table_exists() and cls.select().count() > 0:
+            return int(cls.select(pw.fn.Max(cls.tweet_id)).scalar())
+        else:
+            return None
+
+
+class BanrisulSqLite(pw.Model):
+    class Meta:
+        database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'caixa.db')
+
+
+class BanrisulTweets(BanrisulSqLite):
+    tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
+    tweet_create_at = pw.DateTimeField(index=True)
+    user_id = pw.CharField()
+    user_since = pw.DateTimeField()
+    user_friends_count = pw.IntegerField()
+    user_followers_count = pw.IntegerField()
+    user_location = pw.CharField()
+    tweet_text = pw.TextField()
+    key_words = pw.TextField()
+    blob = pw.TextField()
+
+    def create_or_ignore_table(self):
+        if self.table_exists() == False:
+            self.create_table()
+
+    @classmethod
+    def get_max_tweet_id(cls):
+        if cls.table_exists() and cls.select().count() > 0:
+            return int(cls.select(pw.fn.Max(cls.tweet_id)).scalar())
+        else:
+            return None
+
+
+class NextSqLite(pw.Model):
+    class Meta:
+        database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'caixa.db')
+
+
+class NextTweets(NextSqLite):
+    tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
+    tweet_create_at = pw.DateTimeField(index=True)
+    user_id = pw.CharField()
+    user_since = pw.DateTimeField()
+    user_friends_count = pw.IntegerField()
+    user_followers_count = pw.IntegerField()
+    user_location = pw.CharField()
+    tweet_text = pw.TextField()
+    key_words = pw.TextField()
+    blob = pw.TextField()
+
+    def create_or_ignore_table(self):
+        if self.table_exists() == False:
+            self.create_table()
+
+    @classmethod
+    def get_max_tweet_id(cls):
+        if cls.table_exists() and cls.select().count() > 0:
+            return int(cls.select(pw.fn.Max(cls.tweet_id)).scalar())
+        else:
+            return None
+
+
+class NeonSqLite(pw.Model):
+    class Meta:
+        database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'caixa.db')
+
+
+class NeonTweets(NeonSqLite):
+    tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
+    tweet_create_at = pw.DateTimeField(index=True)
+    user_id = pw.CharField()
+    user_since = pw.DateTimeField()
+    user_friends_count = pw.IntegerField()
+    user_followers_count = pw.IntegerField()
+    user_location = pw.CharField()
+    tweet_text = pw.TextField()
+    key_words = pw.TextField()
+    blob = pw.TextField()
+
+    def create_or_ignore_table(self):
+        if self.table_exists() == False:
+            self.create_table()
+
+    @classmethod
+    def get_max_tweet_id(cls):
+        if cls.table_exists() and cls.select().count() > 0:
+            return int(cls.select(pw.fn.Max(cls.tweet_id)).scalar())
+        else:
+            return None
+
+class InterSqLite(pw.Model):
+    class Meta:
+        database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'caixa.db')
+
+
+class InterTweets(InterSqLite):
+    tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
+    tweet_create_at = pw.DateTimeField(index=True)
+    user_id = pw.CharField()
+    user_since = pw.DateTimeField()
+    user_friends_count = pw.IntegerField()
+    user_followers_count = pw.IntegerField()
+    user_location = pw.CharField()
+    tweet_text = pw.TextField()
+    key_words = pw.TextField()
+    blob = pw.TextField()
+
+    def create_or_ignore_table(self):
+        if self.table_exists() == False:
+            self.create_table()
+
+    @classmethod
+    def get_max_tweet_id(cls):
+        if cls.table_exists() and cls.select().count() > 0:
+            return int(cls.select(pw.fn.Max(cls.tweet_id)).scalar())
+        else:
+            return None
+
+class OriginalSqLite(pw.Model):
+    class Meta:
+        database = pw.SqliteDatabase(DATA_STORAGE_DIR + 'caixa.db')
+
+
+class OriginalTweets(OriginalSqLite):
     tweet_id = pw.CharField(unique=True, null=False, primary_key=True)
     tweet_create_at = pw.DateTimeField(index=True)
     user_id = pw.CharField()
