@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-ENVNAME=$(basename `pwd`)
-MY_PATH=`pwd`
+ENVNAME=xinga-muito
+MY_PATH=$(dirname `realpath $0`)
 echo Consuming from Twitter...
 
 source activate $ENVNAME
