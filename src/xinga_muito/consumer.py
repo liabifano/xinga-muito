@@ -68,7 +68,6 @@ def from_twitter(key_words):
                                 queries,
                                 max_ids)
 
-    # TODO: fix this mess and also in data_model
     # TODO: make it deal with fails, use future
     for bank in key_words.keys():
         get_parse_save_tweets(data_model.TwitterBanks(), bank, **requests_param[bank])
