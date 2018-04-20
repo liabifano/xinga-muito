@@ -20,13 +20,15 @@ HTTPS_HANDLER = HTTPSHandler(debuglevel=0)
 URL_QUERY = "https://api.twitter.com/1.1/search/tweets.json"
 SLEEP_TIME_REQUESTS = 20
 
-BOOTSTRAP_ID = 979716455674601474
+BOOTSTRAP_ID = 983456018452697088
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ENV = 'test'
 DATA_STORAGE_PATH = os.path.join((os.sep).join(BASE_DIR.split(os.sep)[0:-2]), 'data/storage/')
 DATA_STORAGE_DIR = os.path.join(DATA_STORAGE_PATH, 'test/') if ENV \
     else os.path.join(DATA_STORAGE_PATH, 'prod/')
+
+ENGINE = 'postgresql://lia:passme@localhost:5432/xinga-muito'
 
 KEY_WORDS = {# Biggest ones
              'itau': ['@itau'],

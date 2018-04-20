@@ -17,3 +17,4 @@ build
 *.ipynb
 *.ipynb_checkpoints
 analysis
+create-db.sh
